@@ -110,10 +110,10 @@ public final class MockForm extends MockContainer {
 
   // TODO(lizlooney) 320x480 is the resolution of the G1. Do we want to change this to the
   // resolution of the Nexus One?
-  private static final int PORTRAIT_WIDTH = 320;
-  private static final int PORTRAIT_HEIGHT = 480;
-  private static final int LANDSCAPE_WIDTH = 480;
-  private static final int LANDSCAPE_HEIGHT = 320;
+  private static final int PORTRAIT_WIDTH = 360;//GlassInventor
+  private static final int PORTRAIT_HEIGHT = 640;//GlassInventor
+  private static final int LANDSCAPE_WIDTH = 640;//GlassInventor
+  private static final int LANDSCAPE_HEIGHT = 360;//GlassInventor
 
   // Property names
   private static final String PROPERTY_NAME_TITLE = "Title";
@@ -171,9 +171,9 @@ public final class MockForm extends MockContainer {
     formWidget.setStylePrimaryName("ode-SimpleMockForm");
 
     // Initialize mock form UI by adding the phone bar and title bar.
-    formWidget.add(new PhoneBar());
+    //formWidget.add(new PhoneBar()); GlassInventor: no title bars
     titleBar = new TitleBar();
-    formWidget.add(titleBar);
+    //formWidget.add(titleBar); GlassInventor: no title bars
 
     // Put a ScrollPanel around the rootPanel.
     scrollPanel = new ScrollPanel(rootPanel);
@@ -181,7 +181,7 @@ public final class MockForm extends MockContainer {
 
     screenWidth = PORTRAIT_WIDTH;
     screenHeight = PORTRAIT_HEIGHT;
-    usableScreenHeight = screenHeight - PhoneBar.HEIGHT - TitleBar.HEIGHT;
+    usableScreenHeight = screenHeight;// - PhoneBar.HEIGHT - TitleBar.HEIGHT; GlassInventor: no title bars
 
     // This is just the initial size of the form. It will be resized in refresh();
     rootPanel.setPixelSize(screenWidth, usableScreenHeight);

@@ -66,11 +66,11 @@ public final class Label extends AndroidViewComponent {
     // Default property values
     TextAlignment(Component.ALIGNMENT_NORMAL);
     BackgroundColor(Component.COLOR_NONE);
-    fontTypeface = Component.TYPEFACE_DEFAULT;
+    fontTypeface = Component.TYPEFACE_ROBOTO_THIN;
     TextViewUtil.setFontTypeface(view, fontTypeface, bold, italic);
     FontSize(Component.FONT_DEFAULT_SIZE);
     Text("");
-    TextColor(Component.COLOR_BLACK);
+    TextColor(Component.COLOR_WHITE);
   }
 
   @Override
@@ -249,7 +249,7 @@ public final class Label extends AndroidViewComponent {
    *                  {@link Component#TYPEFACE_MONOSPACE}
    */
   @DesignerProperty(editorType = PropertyTypeConstants.PROPERTY_TYPE_TYPEFACE,
-      defaultValue = Component.TYPEFACE_DEFAULT + "")
+      defaultValue = Component.TYPEFACE_ROBOTO_THIN + "")
   @SimpleProperty(
       userVisible = false)
   public void FontTypeface(int typeface) {
@@ -299,14 +299,14 @@ public final class Label extends AndroidViewComponent {
    * @param argb  text RGB color with alpha
    */
   @DesignerProperty(editorType = PropertyTypeConstants.PROPERTY_TYPE_COLOR,
-      defaultValue = Component.DEFAULT_VALUE_COLOR_BLACK)
+      defaultValue = Component.DEFAULT_VALUE_COLOR_WHITE)
   @SimpleProperty
   public void TextColor(int argb) {
     textColor = argb;
     if (argb != Component.COLOR_DEFAULT) {
       TextViewUtil.setTextColor(view, argb);
     } else {
-      TextViewUtil.setTextColor(view, Component.COLOR_BLACK);
+      TextViewUtil.setTextColor(view, Component.COLOR_WHITE);
     }
   }
 }

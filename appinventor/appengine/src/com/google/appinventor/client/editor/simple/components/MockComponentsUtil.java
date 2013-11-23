@@ -148,6 +148,7 @@ public final class MockComponentsUtil {
    *                  "3" for monospace
    */
   static void setWidgetFontTypeface(Widget widget, String typeface) {
+    String weight = "";
     switch (Integer.parseInt(typeface)) {
       default:
         // This should never happen
@@ -155,7 +156,8 @@ public final class MockComponentsUtil {
 
       case 0:
       case 1:
-        typeface = "sans-serif";
+        //typeface = "sans-serif";
+        typeface = "Roboto";
         break;
 
       case 2:
@@ -165,8 +167,20 @@ public final class MockComponentsUtil {
       case 3:
         typeface = "monospace";
         break;
+      case 4: //Roboto
+        typeface = "Roboto";
+        break;
+      case 5: //Roboto light
+        typeface = "Roboto";
+        weight = "300";
+        break;
+      case 6: //Roboto thin
+        typeface = "Roboto";
+        weight = "100";
+        break;
     }
     DOM.setStyleAttribute(widget.getElement(), "fontFamily", typeface);
+    DOM.setStyleAttribute(widget.getElement(), "fontWeight", weight);
   }
 
   /**

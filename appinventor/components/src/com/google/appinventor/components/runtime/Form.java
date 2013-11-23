@@ -198,7 +198,7 @@ public class Form extends Activity
   private void defaultPropertyValues() {
     Scrollable(true); // frameLayout is created in Scrollable()
     BackgroundImage("");
-    BackgroundColor(Component.COLOR_WHITE);
+    BackgroundColor(Component.COLOR_BLACK);
     AlignHorizontal(ComponentConstants.GRAVITY_LEFT);
     AlignVertical(ComponentConstants.GRAVITY_TOP);
     Title("");
@@ -620,7 +620,7 @@ public class Form extends Activity
    * @param argb  background RGB color with alpha
    */
   @DesignerProperty(editorType = PropertyTypeConstants.PROPERTY_TYPE_COLOR,
-      defaultValue = Component.DEFAULT_VALUE_COLOR_WHITE)
+      defaultValue = Component.DEFAULT_VALUE_COLOR_BLACK)
   @SimpleProperty
   public void BackgroundColor(int argb) {
     backgroundColor = argb;
@@ -629,9 +629,9 @@ public class Form extends Activity
       // Just setting the background color on the layout manager is insufficient.
       frameLayout.setBackgroundColor(argb);
     } else {
-      viewLayout.getLayoutManager().setBackgroundColor(Component.COLOR_WHITE);
+      viewLayout.getLayoutManager().setBackgroundColor(Component.COLOR_BLACK);
       // Just setting the background color on the layout manager is insufficient.
-      frameLayout.setBackgroundColor(Component.COLOR_WHITE);
+      frameLayout.setBackgroundColor(Component.COLOR_BLACK);
     }
   }
 
@@ -751,7 +751,7 @@ public class Form extends Activity
    * @param screenOrientation  the screen orientation as a string
    */
   @DesignerProperty(editorType = PropertyTypeConstants.PROPERTY_TYPE_SCREEN_ORIENTATION,
-      defaultValue = "unspecified")
+      defaultValue = "landscape")
   @SimpleProperty(category = PropertyCategory.APPEARANCE)
   public void ScreenOrientation(String screenOrientation) {
     if (screenOrientation.equalsIgnoreCase("behind")) {
