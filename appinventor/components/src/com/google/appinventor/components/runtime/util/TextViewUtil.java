@@ -12,6 +12,10 @@ import android.graphics.Typeface;
 import android.view.Gravity;
 import android.widget.TextView;
 
+import java.util.HashMap; //GlassInventor: fonts
+import java.util.Map;
+import android.content.Context;
+
 /**
  * Helper methods for manipulating {@link TextView} objects.
  *
@@ -121,6 +125,7 @@ public class TextViewUtil {
   public static void setFontTypeface(TextView textview, int typeface,
       boolean bold, boolean italic) {
     Typeface tf;
+    boolean loadedFont = false;
     switch (typeface) {
       default:
         throw new IllegalArgumentException();
@@ -140,6 +145,12 @@ public class TextViewUtil {
       case Component.TYPEFACE_MONOSPACE:
         tf = Typeface.MONOSPACE;
         break;
+      case Component.TYPEFACE_ROBOTO: //GlassInventor: Handle Roboto in plain, thin and light
+      case Component.TYPEFACE_ROBOTO_LIGHT:
+      case Component.TYPEFACE_ROBOTO_THIN:
+        tf = loadFont(textview.getContext(), typeface, bold, italic);
+        loadedFont = true;
+        break;
     }
 
     int style = 0;
@@ -149,7 +160,7 @@ public class TextViewUtil {
     if (italic) {
       style |= Typeface.ITALIC;
     }
-    textview.setTypeface(Typeface.create(tf, style));
+    textview.setTypeface(loadedFont? tf: Typeface.create(tf, style));
     textview.requestLayout();
   }
 
@@ -188,4 +199,43 @@ public class TextViewUtil {
   public static void setTextColors(TextView textview, ColorStateList colorStateList) {
     textview.setTextColor(colorStateList);
   }
+
+  private static Typeface loadFont(Context context, int fontType, boolean bold, boolean italic) {
+    String fontPostfix = "";
+    if (bold) {
+      fontPostfix = "Bold";
+    }
+    if (italic) {
+      fontPostfix += "Italic";
+    }
+    if (!bold && !italic && fontType == Component.TYPEFACE_ROBOTO) {
+      fontPostfix = "Regular";
+    }
+    String fontName = null;
+    switch(fontType) {
+      case Component.TYPEFACE_ROBOTO: //GlassInventor: Handle Roboto in plain, thin and light
+        fontName = "Roboto-";
+        break;
+      case Component.TYPEFACE_ROBOTO_LIGHT:
+        fontName = "Roboto-Light";
+        break;
+      case Component.TYPEFACE_ROBOTO_THIN:
+        fontName = "Roboto-Thin";
+        break;
+    }
+    String fontPath = fontName + fontPostfix;
+    Typeface retval = fontCache.get(fontPath);
+    if (retval == null) {
+      try {
+        retval = Typeface.createFromAsset(context.getAssets(), "fonts/" + fontPath + ".ttf");
+      } catch (Exception e) {
+        retval = Typeface.DEFAULT;
+        e.printStackTrace();
+        System.err.println("Font name: " + "fonts/" + fontPath + ".ttf");
+      }
+      fontCache.put(fontPath, retval);
+    }
+    return retval;
+  }
+  private static Map<String, Typeface> fontCache = new HashMap<String, Typeface>();
 }

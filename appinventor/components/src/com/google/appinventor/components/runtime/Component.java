@@ -100,6 +100,9 @@ public interface Component {
   static final int TYPEFACE_SANSSERIF = 1;
   static final int TYPEFACE_SERIF = 2;
   static final int TYPEFACE_MONOSPACE = 3;
+  static final int TYPEFACE_ROBOTO = 4;
+  static final int TYPEFACE_ROBOTO_LIGHT = 5;
+  static final int TYPEFACE_ROBOTO_THIN = 6;
 
   /*
    * Length constants (for width and height).

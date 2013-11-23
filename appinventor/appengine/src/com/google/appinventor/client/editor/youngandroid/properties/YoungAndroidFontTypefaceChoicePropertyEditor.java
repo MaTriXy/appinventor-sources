@@ -19,7 +19,10 @@ public class YoungAndroidFontTypefaceChoicePropertyEditor extends ChoiceProperty
     new Choice(MESSAGES.defaultFontTypeface(), "0"),
     new Choice(MESSAGES.sansSerifFontTypeface() , "1"),
     new Choice(MESSAGES.serifFontTypeface(), "2"),
-    new Choice(MESSAGES.monospaceFontTypeface(), "3")
+    new Choice(MESSAGES.monospaceFontTypeface(), "3"),
+    new Choice("Roboto", "4"),
+    new Choice("Roboto Light", "5"),
+    new Choice("Roboto Thin", "6"),
   };
 
   public YoungAndroidFontTypefaceChoicePropertyEditor() {

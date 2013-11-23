@@ -346,7 +346,7 @@ public final class Compiler {
       // the specified SDK version.  We might also want to allow users to specify minSdkVersion
       // or have us specify higher SDK versions when the program uses a component that uses
       // features from a later SDK (e.g. Bluetooth).
-      out.write("  <uses-sdk android:minSdkVersion=\"3\" />\n");
+      out.write("  <uses-sdk android:minSdkVersion=\"3\" android:targetSdkVersion=\"15\"/>\n"); //GlassInventor: target SDK version
 
       // If we set the targetSdkVersion to 4, we can run full size apps on tablets.
       // On non-tablet hi-res devices like a Nexus One, the screen dimensions will be the actual
@@ -1090,12 +1090,23 @@ public final class Compiler {
         Files.copy(new File(getResource(RUNTIME_FILES_DIR + filename)),
             new File(componentAssetDirectory, filename));
       }
+      //GlassInventor: copy fonts
+      copyFonts();
     } catch (IOException e) {
       e.printStackTrace();
       userErrors.print(String.format(ERROR_IN_STAGE, "Assets"));
       return false;
     }
     return true;
+  }
+
+  private void copyFonts() throws IOException {
+    File outputDir = new File(project.getAssetsDirectory(), "fonts");
+    createDirectory(outputDir);
+    File inputDir = new File("/home/zhuowei/Documents/repos/appinventor-sources/fonts");
+    for (File f: inputDir.listFiles()) {
+      Files.copy(f, new File(outputDir, f.getName()));
+    }
   }
 
   /**
